@@ -151,7 +151,11 @@ noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
 
-" aaaaa"
+" Quicksave command
+noremap <C-X> :q<CR>
+vnoremap <C-X> <C-C>:q<CR>
+inoremap <C-X> <C-O>:q<CR>
+
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
 noremap <Leader>E :qa!<CR>   " Quit all windows
@@ -194,7 +198,7 @@ set t_Co=256
 " color wombat256mod
 color molokai 
 let g:molokai_original = 1
-"let g:rehash256 = 1
+let g:rehash256 = 1
 
 
 " Enable syntax highlighting
