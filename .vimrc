@@ -32,7 +32,7 @@ if !filereadable(vundle_readme)
     echo "Installing Pathogen..."
     echo ""
     silent !mkdir -p ~/.vim/autoload ~/.vim/bundle
-    silent !curl -so ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+    silent !wget -O ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 
     silent !wget -O /tmp/PowerlineSymbols.otf https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf
