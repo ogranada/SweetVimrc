@@ -93,6 +93,12 @@ Bundle 'wavded/vim-stylus'
 " multiple cursors
 Bundle 'terryma/vim-multiple-cursors'
 
+" Autocomplete square and curly brackets
+Bundle 'Raimondi/delimitMate'
+
+" Identation Highlight
+Bundle 'Yggdroot/indentLine'
+
 " Poweline
 " Deprecation Warning
 Bundle 'Lokaltog/vim-powerline'
