@@ -132,6 +132,8 @@ set clipboard=unnamed
 "set mouse=a  " on OSX press ALT and click
 "et bs=2     " make backspace behave like normal again
 
+" Enable open Quicksearch Panel elements in new tab
+set switchbuf+=usetab,newtab
 
 " Rebind <Leader> key
 " I like to have it here becuase it is easier to reach than the default and
@@ -141,20 +143,34 @@ let mapleader = ","
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+noremap <C-f> :nohl<CR>
+vnoremap <C-f> :nohl<CR>
+inoremap <C-f> :nohl<CR>
 
+" config to use Ctrl+S 
+" zsh: add to .zshrc next:
+"       alias vim="stty stop '' -ixoff ; vim"
+" bash: add to .bashrc next:
+"       vim()
+"       {
+"           # osx users, use stty -g
+"           local STTYOPTS="$(stty --save)"
+"           stty stop '' -ixoff
+"           command vim "$@"
+"           stty "$STTYOPTS"
+"       }
 
 " Quicksave command
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
-
-" Quicksave command
-noremap <C-X> :q<CR>
-vnoremap <C-X> <C-C>:q<CR>
-inoremap <C-X> <C-O>:q<CR>
+" command -nargs=0 -bar Update if &modified 
+"                            \|    if empty(bufname('%'))
+"                            \|        browse confirm write
+"                            \|    else
+"                            \|        confirm write
+"                            \|    endif
+"                            \|endif
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update<CR>
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
@@ -326,25 +342,50 @@ command! -nargs=0 Vstop :call vlayer#Stop()
 command! -nargs=0 Vskip :call vlayer#Skip()
 
 " NeoComplCache ------------------------------
+" 
+" " most of them not documented because I'm not sure how they work
+" " (docs aren't good, had to do a lot of trial and error to make 
+" " it play nice)
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_ignore_case = 1
+" let g:neocomplcache_enable_smart_case = 1
+" let g:neocomplcache_enable_auto_select = 1
+" let g:neocomplcache_enable_fuzzy_completion = 1
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_fuzzy_completion_start_length = 1
+" let g:neocomplcache_auto_completion_start_length = 1
+" let g:neocomplcache_manual_completion_start_length = 1
+" let g:neocomplcache_min_keyword_length = 1
+" let g:neocomplcache_min_syntax_length = 1
+" " complete with workds from any opened file
+" let g:neocomplcache_same_filetype_lists = {}
+" let g:neocomplcache_same_filetype_lists._ = '_'
 
-" most of them not documented because I'm not sure how they work
-" (docs aren't good, had to do a lot of trial and error to make 
-" it play nice)
+
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
+" Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+" let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 1
-" complete with workds from any opened file
+let g:neocomplcache_fuzzy_completion_start_length = 3
+
 let g:neocomplcache_same_filetype_lists = {}
 let g:neocomplcache_same_filetype_lists._ = '_'
+
+" Enable heavy features.
+" Use camel case completion.
+"let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+"let g:neocomplcache_enable_underbar_completion = 1
+
+
 
 autocmd VimLeavePre * call vlayer#Stop()
 
