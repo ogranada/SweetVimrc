@@ -55,7 +55,8 @@ Bundle 'majutsushi/tagbar'
 " Zen coding
 Bundle 'mattn/emmet-vim'
 " Git integration
-Bundle 'motemen/git-vim'
+"Bundle 'motemen/git-vim'
+Bundle 'tpope/vim-fugitive'
 
 " Airline
 " Bundle 'bling/vim-airline'
@@ -100,7 +101,10 @@ Bundle 'Lokaltog/vim-powerline'
 " Bundle 'powerline/fonts'
 
 Bundle 'davidhalter/jedi-vim'
-Bundle 'ogranada/vlayer'
+"Bundle 'ogranada/vlayer'
+
+Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -126,7 +130,8 @@ autocmd! bufwritepost .vimrc source %
 
 set pastetoggle=<F2>
 set clipboard=unnamed
-
+set backspace=2
+set backspace=indent,eol,start
 
 " Mouse and backspace
 "set mouse=a  " on OSX press ALT and click
@@ -146,6 +151,22 @@ let mapleader = ","
 noremap <C-f> :nohl<CR>
 vnoremap <C-f> :nohl<CR>
 inoremap <C-f> :nohl<CR>
+
+let g:multi_cursor_use_default_mapping=0
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" IndentLine
+" Color spaces
+let g:indentLine_color_term = 239
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+
+let g:indentLine_leadingSpaceChar="·"
+let g:indentLine_leadingSpaceEnabled=1
 
 " config to use Ctrl+S 
 " zsh: add to .zshrc next:
@@ -176,6 +197,8 @@ inoremap <C-S> <C-O>:update<CR>
 noremap <Leader>e :quit<CR>  " Quit current window
 noremap <Leader>E :qa!<CR>   " Quit all windows
 
+" Enable jump between lines with left-right keys
+set whichwrap+=<,>,h,l,[,]
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -223,14 +246,17 @@ filetype off
 filetype plugin indent on
 syntax on
 
+" Highlight extensions
+au BufNewFile,BufRead *.less set filetype=css
+
 
 " Showing line numbers and length
 set number  " show line numbers
-set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
+" set tw=79   " width of document (used by gd)
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=233
 
 
 " easier formatting of paragraphs
@@ -403,11 +429,18 @@ set laststatus=2
 set encoding=utf-8
 let g:Powerline_symbols = 'unicode'
 
-
+" Vim Fugitive Git Plugin 
+set diffopt+=vertical
 
 " Settings for ctrlp
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
+
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+
 let g:ctrlp_max_height = 30
 set wildignore+=*.pyc
 set wildignore+=*_build/*
